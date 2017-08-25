@@ -16,7 +16,7 @@ public class Model {
             String[] Arrays = database.getArrays();
             value = Arrays[index];
         } catch (Exception e) {
-            return "Not Found!";
+            return "未找到该名人名言";
         }
         return value;
     }

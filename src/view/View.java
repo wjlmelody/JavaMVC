@@ -1,30 +1,54 @@
 package view;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class View {
-    public String select_quote(){
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in ));
-        //java.io.InputStreamReader继承了Reader类
-        String read = null;
-        System.out.print("请输入编号进行查询：");
-        try {
-            read = br.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return read;
+
+    public Select select;
+    public JFrame jFrame;
+
+    public View(){
+        this.select = new Select();
+        this.jFrame = new JFrame();
     }
 
     public void show(String quote){
-        System.out.println(quote);
-
+        Show f = new Show(this.jFrame);
+        f.setTitle("名人名言显示");
+        f.setVisible(true);
+        //加上这一句就可以把Frame放在最中间了
+        f.setLocationRelativeTo(null);
+        //如果没有这一句，在点击关闭Frame的时候程序其实还是在执行状态中的，加上这一句才算是真正的把资源释放掉了
+        f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        f.setTextArea(quote);
+        f.getTextArea().setLineWrap(true);        //激活自动换行功能
+        f.getTextArea().setWrapStyleWord(true);            // 激活断行不断字功能
+        f.getJButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                f.dispose();
+            }
+        });
     }
 
     public void error(String quote){
-        System.out.println(quote);
+        Show f = new Show(this.jFrame);
+        f.setTitle("错误提示");
+        f.setVisible(true);
+        //加上这一句就可以把Frame放在最中间了
+        f.setLocationRelativeTo(null);
+        //如果没有这一句，在点击关闭Frame的时候程序其实还是在执行状态中的，加上这一句才算是真正的把资源释放掉了
+        f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        f.setTextArea(quote);
+        f.getTextArea().setLineWrap(true);        //激活自动换行功能
+        f.getTextArea().setWrapStyleWord(true);            // 激活断行不断字功能
+        f.getJButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                f.dispose();
+            }
+        });
     }
-
 }

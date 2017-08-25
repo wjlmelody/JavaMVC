@@ -4,15 +4,9 @@
 
 package view;
 
-import org.jdesktop.swingx.*;
-import org.jdesktop.swingx.VerticalLayout;
-
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * @author heheda
- */
 public class Select extends JFrame {
     public Select() {
         initComponents();
@@ -21,9 +15,8 @@ public class Select extends JFrame {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         panel1 = new JPanel();
-        panel2 = new JPanel();
         label1 = new JLabel();
-        textField1 = new JTextField();
+        textField2 = new JTextField();
         button1 = new JButton();
 
         //======== this ========
@@ -32,25 +25,36 @@ public class Select extends JFrame {
 
         //======== panel1 ========
         {
-            panel1.setLayout(new VerticalLayout());
+            panel1.setLayout(null);
 
-            //======== panel2 ========
-            {
-                panel2.setLayout(new HorizontalLayout());
-
-                //---- label1 ----
-                label1.setText("\u8bf7\u8f93\u5165\u7f16\u53f7\u8fdb\u884c\u67e5\u8be2");
-                panel2.add(label1);
-                panel2.add(textField1);
-            }
-            panel1.add(panel2);
+            //---- label1 ----
+            label1.setText("\u8bf7\u8f93\u5165\u7f16\u53f7\u8fdb\u884c\u67e5\u8be2");
+            panel1.add(label1);
+            label1.setBounds(new Rectangle(new Point(0, 5), label1.getPreferredSize()));
+            panel1.add(textField2);
+            textField2.setBounds(130, 0, 80, 25);
 
             //---- button1 ----
             button1.setText("\u67e5\u8be2");
             panel1.add(button1);
+            button1.setBounds(new Rectangle(new Point(75, 35), button1.getPreferredSize()));
+
+            { // compute preferred size
+                Dimension preferredSize = new Dimension();
+                for(int i = 0; i < panel1.getComponentCount(); i++) {
+                    Rectangle bounds = panel1.getComponent(i).getBounds();
+                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                }
+                Insets insets = panel1.getInsets();
+                preferredSize.width += insets.right;
+                preferredSize.height += insets.bottom;
+                panel1.setMinimumSize(preferredSize);
+                panel1.setPreferredSize(preferredSize);
+            }
         }
         contentPane.add(panel1);
-        panel1.setBounds(85, 20, 155, 50);
+        panel1.setBounds(new Rectangle(new Point(75, 20), panel1.getPreferredSize()));
 
         { // compute preferred size
             Dimension preferredSize = new Dimension();
@@ -65,16 +69,27 @@ public class Select extends JFrame {
             contentPane.setMinimumSize(preferredSize);
             contentPane.setPreferredSize(preferredSize);
         }
-        pack();
+        setSize(365, 130);
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
+    public JButton getJButton(){
+        return button1;
+    }
+
+    public String getJTextFieldText(){
+        return textField2.getText();
+    }
+
+    public JTextField getJTextField(){
+        return textField2;
+    }
+
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel panel1;
-    private JPanel panel2;
     private JLabel label1;
-    private JTextField textField1;
+    private JTextField textField2;
     private JButton button1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
