@@ -7,15 +7,13 @@ import java.awt.event.ActionListener;
 public class View {
 
     public Select select;
-    public JFrame jFrame;
 
     public View(){
         this.select = new Select();
-        this.jFrame = new JFrame();
     }
 
     public void show(String quote){
-        Show f = new Show(this.jFrame);
+        Show f = new Show(this.select);
         f.setTitle("名人名言显示");
         f.setVisible(true);
         //加上这一句就可以把Frame放在最中间了
@@ -34,7 +32,7 @@ public class View {
     }
 
     public void error(String quote){
-        Show f = new Show(this.jFrame);
+        Show f = new Show(this.select);
         f.setTitle("错误提示");
         f.setVisible(true);
         //加上这一句就可以把Frame放在最中间了
